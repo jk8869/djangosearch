@@ -1,0 +1,6 @@
+db.sqlite3
+projects/migrations/__pycache__
+projects/__pycache__
+djangosearch/__pycache__
+staticfiles
+static
