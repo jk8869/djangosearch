@@ -20,6 +20,10 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "react/no-array-index-key": "off",
+        "no-undef": "off",
+        "max-len":"off",
+        "linebreak-style":"off",
         "react/jsx-filename-extension": "off",
         "array-callback-return":"off",
         "no-unused-vars":"off",

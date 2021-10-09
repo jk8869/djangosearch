@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable max-len */
 import React from 'react';
 import { Project } from '../interface/project';
 
