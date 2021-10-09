@@ -12,11 +12,11 @@ export default function ProjectItem({ project } : ProjectItemProps) {
   return (
     <div className="column">
       <div className="card project">
-        <a href="{% url 'project' project.id %}" className="project">
-          <img className="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
+        <a href={project.id} className="project">
+          <img className="project__thumbnail" src={project.featured_image} alt="project thumbnail" />
           <div className="card__body">
             <h3 className="project__title">{project.title}</h3>
-            <p><a className="project__author" href="{% url 'project' project.id %}">By Dennis Ivanov</a></p>
+            <p><a className="project__author" href={project.id}>By Dennis Ivanov</a></p>
             <p className="project--rating">
               <span style={{ fontWeight: 'bold' }}>
                 {project.vote_ratio}
