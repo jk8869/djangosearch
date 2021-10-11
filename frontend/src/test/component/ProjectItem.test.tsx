@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Project } from '../../interface/project';
+import { Project } from '../../interface/Project';
 import ProjectItem from '../../component/ProjectItem';
 import '@testing-library/jest-dom';
 

@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Project } from '../interface/project';
+import { Project } from '../interface/Project';
 
 type ProjectItemProps = {
     project: Project;
 }
 
-export default function ProjectItem({ project } : ProjectItemProps) {
+export default function ProjectPage({ project } : ProjectItemProps) {
   return (
     <main className="singleProject my-md">
       <div className="container">

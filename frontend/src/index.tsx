@@ -1,11 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Project from './page/Project';
+import { Project as ProjectInterface } from './interface/Project';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="project/:id">
+          render=
+          {(project : ProjectInterface) => (
+            <Project
+              project={project}
+            />
+          )}
+        </Route>
+      </Switch>
+      <App />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

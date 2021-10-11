@@ -2,7 +2,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable max-len */
 import React from 'react';
-import { Project } from '../interface/project';
+import { Link } from 'react-router-dom';
+import { Project } from '../interface/Project';
+import ProjectPage from '../page/Project';
 
 type ProjectItemProps = {
     project: Project;
@@ -12,9 +14,9 @@ export default function ProjectItem({ project } : ProjectItemProps) {
   return (
     <div className="column">
       <div className="card project">
-        <a href={project.id} className="project">
+        <Link to={`project/${project.id}`} state={{ project }} component={ProjectPage} className="project">
           <img className="project__thumbnail" src={project.featured_image} alt="project thumbnail" />
-        </a>
+        </Link>
         <div className="card__body">
           <h3 className="project__title">{project.title}</h3>
           <p><a className="project__author" href={project.id}>By Dennis Ivanov</a></p>

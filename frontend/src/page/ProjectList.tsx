@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProjectItem from '../component/ProjectItem';
-import { Project, ProjectConvert } from '../interface/project';
+import { Project, ProjectConvert } from '../interface/Project';
 
 export default function ProjectList() {
   const [projects, setProject] = useState<Project[]>();
