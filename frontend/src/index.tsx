@@ -1,11 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Project from './page/Project';
+import { Project as ProjectInterface } from './interface/Project';
+
+type ProjectItemProps = {
+  project: ProjectInterface;
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route
+          path="/project/:id"
+          render={({ location }) => {
+            const { state } = location;
+            console.log((state as ProjectItemProps).project);
+            return <Project project={(state as ProjectItemProps).project} />;
+          }}
+        />
+      </Switch>
+      <App />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
