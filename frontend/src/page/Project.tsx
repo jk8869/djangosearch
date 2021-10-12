@@ -8,6 +8,7 @@ type ProjectItemProps = {
 }
 
 export default function ProjectPage({ project } : ProjectItemProps) {
+  console.log(`inside project ${project}`);
   return (
     <main className="singleProject my-md">
       <div className="container">
@@ -17,7 +18,7 @@ export default function ProjectPage({ project } : ProjectItemProps) {
             <div className="singleProject__toolStack">
 
               {project.tags.map((tag, index) => (
-                <span className="tag tag--pill tag--sub tag--lg">
+                <span key={index} className="tag tag--pill tag--sub tag--lg">
                   <small>{tag}</small>
                 </span>
               ))}
@@ -32,7 +33,7 @@ export default function ProjectPage({ project } : ProjectItemProps) {
 
           </div>
           <div className="column column--2of3">
-            <img className="singleProject__preview" src="{{ project.featured_image.url }}" alt="portfolio thumbnail" />
+            <img className="singleProject__preview" src={project.featured_image} alt="portfolio thumbnail" />
             <a href="profile.html" className="singleProject__developer">Md. Shahriar Parvez</a>
             <h2 className="singleProject__title">{project.title}</h2>
             <h3 className="singleProject__subtitle">About the Project</h3>

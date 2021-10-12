@@ -6,18 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import Project from './page/Project';
 import { Project as ProjectInterface } from './interface/Project';
 
+type ProjectItemProps = {
+  project: ProjectInterface;
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route path="project/:id">
-          render=
-          {(project : ProjectInterface) => (
-            <Project
-              project={project}
-            />
-          )}
-        </Route>
+        <Route
+          path="/project/:id"
+          render={({ location }) => {
+            const { state } = location;
+            console.log((state as ProjectItemProps).project);
+            return <Project project={(state as ProjectItemProps).project} />;
+          }}
+        />
       </Switch>
       <App />
     </Router>

@@ -14,7 +14,16 @@ export default function ProjectItem({ project } : ProjectItemProps) {
   return (
     <div className="column">
       <div className="card project">
-        <Link to={`project/${project.id}`} state={{ project }} component={ProjectPage} className="project">
+        <Link
+          key={project.id}
+          to={{
+            pathname: `project/${project.id}`,
+            state: {
+              project,
+            },
+          }}
+          className="project"
+        >
           <img className="project__thumbnail" src={project.featured_image} alt="project thumbnail" />
         </Link>
         <div className="card__body">
