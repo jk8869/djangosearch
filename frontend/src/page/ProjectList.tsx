@@ -1,11 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import ProjectItem from '../component/ProjectItem';
 import { Project, ProjectConvert } from '../interface/Project';
+import { ProjectsState } from '../redux/reducers';
+import { fillProjectsList } from '../redux/actions';
 
 export default function ProjectList() {
   const [projects, setProject] = useState<Project[]>();
+  const dispatch = useDispatch();
 
   const getProjects = () => {
     axios.get('http://localhost:8000/api')
@@ -18,6 +22,7 @@ export default function ProjectList() {
           );
         });
         setProject(tempProjects);
+        dispatch(fillProjectsList(tempProjects));
       });
   };
 
