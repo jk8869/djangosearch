@@ -1,14 +1,27 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { useStore } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Project } from '../interface/Project';
 
 type ProjectItemProps = {
     project: Project;
 }
+interface RouteParams {
+  id: string
+}
 
-export default function ProjectPage({ project } : ProjectItemProps) {
-  console.log(`inside project ${project}`);
+export default function ProjectPage() {
+  const store = useStore();
+  const { projects } = store.getState();
+  const params = useParams<RouteParams>();
+  const temp = (projects[0] as Project[]).find((el: Project) => el.id === params.id);
+  if (!temp) {
+    return (<p>not found</p>);
+  }
+  const project : Project = temp;
+
   return (
     <main className="singleProject my-md">
       <div className="container">

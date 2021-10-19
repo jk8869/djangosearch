@@ -7,7 +7,8 @@ import { createStore } from 'redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Project from './page/Project';
-import { Project as ProjectInterface, projectReducer } from './interface/Project';
+import { Project as ProjectInterface } from './interface/Project';
+import { projectReducer } from './redux/reducers';
 
 type ProjectItemProps = {
   project: ProjectInterface;
@@ -22,11 +23,7 @@ ReactDOM.render(
         <Switch>
           <Route
             path="/project/:id"
-            render={({ location }) => {
-              const { state } = location;
-              console.log((state as ProjectItemProps).project);
-              return <Project project={(state as ProjectItemProps).project} />;
-            }}
+            component={Project}
           />
         </Switch>
         <App />
