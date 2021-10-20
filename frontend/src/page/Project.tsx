@@ -5,9 +5,6 @@ import { useStore } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Project } from '../interface/Project';
 
-type ProjectItemProps = {
-    project: Project;
-}
 interface RouteParams {
   id: string
 }

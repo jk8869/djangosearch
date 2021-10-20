@@ -1,18 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Project from './page/Project';
-import { Project as ProjectInterface } from './interface/Project';
 import { projectReducer } from './redux/reducers';
-
-type ProjectItemProps = {
-  project: ProjectInterface;
-}
 
 const store = createStore(projectReducer);
 
@@ -20,12 +14,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Switch>
-          <Route
-            path="/project/:id"
-            component={Project}
-          />
-        </Switch>
+        <Route
+          exact
+          path="/project/:id"
+          component={Project}
+        />
         <App />
       </Router>
     </Provider>
