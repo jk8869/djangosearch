@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
@@ -14,12 +14,14 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Route
-          exact
-          path="/project/:id"
-          component={Project}
-        />
-        <App />
+        <Switch>
+          <Route
+            exact
+            path="/project/:id"
+            component={Project}
+          />
+          <App />
+        </Switch>
       </Router>
     </Provider>
   </React.StrictMode>,

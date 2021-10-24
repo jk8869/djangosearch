@@ -16,7 +16,7 @@ export default function ProjectItem({ project } : ProjectItemProps) {
       <div className="card project">
         <Link
           key={project.id}
-          to={`project/${project.id}`}
+          to={`/project/${project.id}`}
           className="project"
         >
           <img className="project__thumbnail" src={project.featured_image} alt="project thumbnail" />
