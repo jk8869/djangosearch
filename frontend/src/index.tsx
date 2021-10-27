@@ -7,6 +7,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Project from './page/Project';
 import { projectReducer } from './redux/reducers';
+import ProjectList from './page/ProjectList';
+import Navbar from './component/Navbar';
+import ProjectForm from './component/ProjectForm';
 
 const store = createStore(projectReducer);
 
@@ -14,11 +17,27 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
+        <Navbar />
         <Switch>
+          <Route
+            exact
+            path="/projectForm"
+            component={ProjectForm}
+          />
           <Route
             exact
             path="/project/:id"
             component={Project}
+          />
+          <Route
+            exact
+            path="/projects"
+            component={ProjectList}
+          />
+          <Route
+            exact
+            path="/"
+            component={ProjectList}
           />
           <App />
         </Switch>
