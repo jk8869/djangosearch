@@ -1,5 +1,5 @@
 import { Project } from '../interface/Project';
-import {PROJECT_FETCH_SUCCEEDED, PROJECT_LIST_FETCH_FAILED, PROJECT_LIST_FETCH_REQUESTED, PROJECT_LIST_FETCH_SUCCEEDED} from './constants';
+import { PROJECT_LIST_ITEM_SELECTE, PROJECT_LIST_FETCH_FAILED, PROJECT_LIST_FETCH_REQUESTED, PROJECT_LIST_FETCH_SUCCEEDED } from './constants';
 
 export interface ProjectsState {
     projects: Project[];
@@ -10,7 +10,7 @@ const initialState = {
   project: null
 };
 
-export type Action = {type: String, payload: Project[]};
+export type Action = {type: String, payload: any};
 
 export const projectReducer = (
   state: Project[] = initialState.projects,
@@ -22,6 +22,9 @@ export const projectReducer = (
     }
     case PROJECT_LIST_FETCH_SUCCEEDED: {
       return { ...state, projects: [action.payload] };
+    }
+    case PROJECT_LIST_ITEM_SELECTE: {
+      return { ...state, project: action.payload };
     }
     default:
       return state;

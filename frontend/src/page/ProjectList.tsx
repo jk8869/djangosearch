@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProjectItem from '../component/ProjectItem';
 import { Project, ProjectConvert } from '../interface/Project';
 import { ProjectsState } from '../redux/reducers';
-import { fillProjectsList } from '../redux/actions';
+import { fetchProjectsList } from '../redux/actions';
 
 export default function ProjectList() {
   const [projects, setProject] = useState<Project[]>();
@@ -22,7 +22,7 @@ export default function ProjectList() {
           );
         });
         setProject(tempProjects);
-        dispatch(fillProjectsList(tempProjects));
+        dispatch(fetchProjectsList(tempProjects));
       });
   };
 

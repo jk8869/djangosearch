@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Project } from '../interface/Project';
@@ -11,13 +11,7 @@ interface RouteParams {
 
 export default function ProjectPage() {
   const store = useStore();
-  const { projects } = store.getState();
-  const params = useParams<RouteParams>();
-  const temp = (projects[0] as Project[]).find((el: Project) => el.id === params.id);
-  if (!temp) {
-    return (<p>not found</p>);
-  }
-  const project : Project = temp;
+  const { project } = store.getState();
 
   return (
     <main className="singleProject my-md">
@@ -27,7 +21,7 @@ export default function ProjectPage() {
             <h3 className="singleProject__subtitle">Tools & Stacks</h3>
             <div className="singleProject__toolStack">
 
-              {project.tags.map((tag, index) => (
+              {project.tags.map((tag : String, index: any) => (
                 <span key={index} className="tag tag--pill tag--sub tag--lg">
                   <small>{tag}</small>
                 </span>

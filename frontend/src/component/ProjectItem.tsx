@@ -3,18 +3,22 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Project } from '../interface/Project';
 import ProjectPage from '../page/Project';
+import { selectProject } from '../redux/actions';
 
 type ProjectItemProps = {
     project: Project;
 }
 
 export default function ProjectItem({ project } : ProjectItemProps) {
+  const dispatch = useDispatch();
   return (
     <div className="column">
       <div className="card project">
         <Link
+          onClick={() => dispatch(selectProject(project))}
           key={project.id}
           to={`/project/${project.id}`}
           className="project"
