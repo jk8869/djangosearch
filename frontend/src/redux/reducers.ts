@@ -7,21 +7,22 @@ export interface ProjectsState {
 
 const initialState = {
   projects: [],
-  project: null
+  project: null,
+  loading: false
 };
 
 export type Action = {type: String, payload: any};
 
 export const projectReducer = (
   state: Project[] = initialState.projects,
-  action: Action
+  action: Action,
 ) => {
   switch (action.type) {
     case PROJECT_LIST_FETCH_REQUESTED: {
-      return { ...state, projects: [] };
+      return { ...state, loading: action.payload };
     }
     case PROJECT_LIST_FETCH_SUCCEEDED: {
-      return { ...state, projects: [action.payload] };
+      return { ...state, projects: action.payload, loading: false };
     }
     case PROJECT_LIST_ITEM_SELECTE: {
       return { ...state, project: action.payload };

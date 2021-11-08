@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import ProjectItem from '../component/ProjectItem';
 import { Project, ProjectConvert } from '../interface/Project';
-import { ProjectsState } from '../redux/reducers';
-import { fetchProjectsList } from '../redux/actions';
+import { requestProjectsList, fetchProjectsList } from '../redux/actions';
 
-export default function ProjectList() {
-  const [projects, setProject] = useState<Project[]>();
+export function ProjectList(props : any) {
   const dispatch = useDispatch();
+  const { loading, projects } = props;
 
   const getProjects = () => {
+    dispatch(requestProjectsList());
     axios.get('http://localhost:8000/api')
       .then((response: any) => response.data)
       .then((data) => {
@@ -21,7 +21,6 @@ export default function ProjectList() {
             ProjectConvert.toProject(JSON.stringify(item))
           );
         });
-        setProject(tempProjects);
         dispatch(fetchProjectsList(tempProjects));
       });
   };
@@ -29,6 +28,8 @@ export default function ProjectList() {
   useEffect(() => {
     getProjects();
   }, []);
+
+  if (loading || !projects) { return (<div>loading...</div>); }
 
   return (
 
@@ -77,3 +78,10 @@ export default function ProjectList() {
     </main>
   );
 }
+
+const mapStateToProps = (state : any) => ({
+  loading: state.loading,
+  projects: state.projects
+});
+
+export default connect(mapStateToProps)(ProjectList);
