@@ -1,17 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
-import { useStore } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { Project } from '../interface/Project';
+import { connect } from 'react-redux';
 
-interface RouteParams {
-  id: string
-}
-
-export default function ProjectPage() {
-  const store = useStore();
-  const { project } = store.getState();
+const ProjectPage = (prop: any) => {
+  const { project } = prop;
 
   return (
     <main className="singleProject my-md">
@@ -104,4 +97,10 @@ export default function ProjectPage() {
       </div>
     </main>
   );
-}
+};
+
+const mapStateToProps = (state: any) => ({
+  project: state.project
+});
+
+export default connect(mapStateToProps)(ProjectPage);

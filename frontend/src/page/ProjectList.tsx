@@ -6,7 +6,7 @@ import ProjectItem from '../component/ProjectItem';
 import { Project, ProjectConvert } from '../interface/Project';
 import { requestProjectsList, fetchProjectsList } from '../redux/actions';
 
-export function ProjectList(props : any) {
+const ProjectList = (props : any) => {
   const dispatch = useDispatch();
   const { loading, projects } = props;
 
@@ -77,7 +77,7 @@ export function ProjectList(props : any) {
       </section>
     </main>
   );
-}
+};
 
 const mapStateToProps = (state : any) => ({
   loading: state.loading,

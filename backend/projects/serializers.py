@@ -12,4 +12,4 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class ProjectFormSerializer(FormSerializer):
     class Meta(object):
-        form = Project
+        form = ProjectForm

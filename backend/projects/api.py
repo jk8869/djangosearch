@@ -15,4 +15,4 @@ def projects(request):
 def createProject(request):
     form = ProjectForm()
     serializer = ProjectFormSerializer(form, many=True)
-    return JsonResponse(serializer, safe=False)
+    return JsonResponse(serializer.data, safe=False)

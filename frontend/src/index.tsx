@@ -9,7 +9,7 @@ import Project from './page/Project';
 import { projectReducer } from './redux/reducers';
 import ProjectList from './page/ProjectList';
 import Navbar from './component/Navbar';
-import ProjectForm from './component/ProjectForm';
+import ProjectForm from './page/ProjectForm';
 
 const store = createStore(projectReducer);
 
