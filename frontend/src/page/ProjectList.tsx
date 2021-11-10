@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { connect, useDispatch } from 'react-redux';
 import ProjectItem from '../component/ProjectItem';
 import { Project, ProjectConvert } from '../interface/Project';
 import { requestProjectsList, fetchProjectsList } from '../redux/actions';
+import { Api } from '../helper/Api';
 
 const ProjectList = (props : any) => {
   const dispatch = useDispatch();
@@ -12,17 +12,18 @@ const ProjectList = (props : any) => {
 
   const getProjects = () => {
     dispatch(requestProjectsList());
-    axios.get('http://localhost:8000/api')
-      .then((response: any) => response.data)
-      .then((data) => {
-        const tempProjects : Project[] = [];
-        data.map((item: string) => {
-          tempProjects?.push(
-            ProjectConvert.toProject(JSON.stringify(item))
-          );
-        });
-        dispatch(fetchProjectsList(tempProjects));
+    const api = new Api();
+    api.getProjects((data : any) => {
+      const tempProjects : Project[] = [];
+      data.map((item: string) => {
+        tempProjects?.push(
+          ProjectConvert.toProject(JSON.stringify(item))
+        );
       });
+      dispatch(fetchProjectsList(tempProjects));
+    }, (e: any) => {
+
+    });
   };
 
   useEffect(() => {
