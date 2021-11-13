@@ -30,7 +30,8 @@
         "comma-dangle": "off",
         "object-curly-newline":"off",
         "import/no-named-as-default": "off",        
-        "no-use-before-define":"off",                
+        "no-use-before-define":"off",
+        "camelcase":"off",                
         "import/extensions": [
             "error",
             "ignorePackages",

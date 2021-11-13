@@ -12,7 +12,12 @@ import { Api } from '../helper/Api';
 interface ProjectFormValues {
   title: string;
   descriptions: string;
-  demoLink: string;
+  featured_image: string;
+  demo_link: string;
+  source_link: string;
+  tags: any;
+  vote_ratio: number;
+  vote_total: number;
 }
 
 const ProjectForm = (props: any) => {
@@ -43,16 +48,18 @@ const ProjectForm = (props: any) => {
           initialValues={{
             title: '',
             descriptions: '',
-            demoLink: '',
+            featured_image: '',
+            demo_link: '',
+            source_link: '',
+            tags: [],
+            vote_ratio: 0,
+            vote_total: 0,
           }}
           onSubmit={(
             values: ProjectFormValues,
             { setSubmitting }: FormikHelpers<ProjectFormValues>
           ) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 500);
+            api.postProject(JSON.stringify(values, null, 2), ((res: any) => console.log(res)), ((e: any) => console.log(e)));
           }}
         >
           <Form className="form">
@@ -70,8 +77,8 @@ const ProjectForm = (props: any) => {
               <label htmlFor="formInput#text">Description: </label>
               <Field
                 className="input input--text"
-                id="description#text"
-                name="description"
+                id="descriptions#text"
+                name="descriptions"
                 placeholder="Enter description"
                 as="textarea"
               />
@@ -108,12 +115,14 @@ const ProjectForm = (props: any) => {
             </div>
             <div className="form__field">
               <label htmlFor="formInput#select">Tags: </label>
-              <select
+              <Field
+                component="select"
                 className="input input--text"
+                name="tags"
                 multiple
               >
-                {tags.map((tag: Tag, index: Number) => <option value="grapefruit">{tag.name}</option>)}
-              </select>
+                {tags.map((tag: Tag, index: Number) => <option value={`${tag.id}`}>{tag.name}</option>)}
+              </Field>
             </div>
 
             <div className="form__field">

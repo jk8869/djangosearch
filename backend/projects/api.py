@@ -17,3 +17,13 @@ def tags(request):
     tags = Tag.objects.all()
     serializer = TagSerializer(tags, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+def createProject(request):
+    form = ProjectForm()
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse([{'status': 200}], safe=False)
+
+    return JsonResponse([{'status': form.errors}], safe=False)
