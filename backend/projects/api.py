@@ -6,6 +6,7 @@ from .models import Tag
 from .forms import ProjectForm
 from .serializers import ProjectSerializer
 from .serializers import TagSerializer
+import json
 
 
 def projects(request):
@@ -19,11 +20,12 @@ def tags(request):
     return JsonResponse(serializer.data, safe=False)
 
 def createProject(request):
-    form = ProjectForm()
-    if request.method == 'POST':
-        form = ProjectForm(request.POST)
+    form = ProjectForm() 
+    title = request.POST.get('title')    
+    if request.method == 'POST':        
+        form = ProjectForm(json.loads(request.body), request.FILES)
         if form.is_valid():
             form.save()
             return JsonResponse([{'status': 200}], safe=False)
 
-    return JsonResponse([{'status': form.errors}], safe=False)
+    return JsonResponse([{'status': False, 'error': form.errors}], safe=False)

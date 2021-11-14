@@ -18,7 +18,7 @@ def project(request, pk):
 
 def createProject(request):
     form = ProjectForm()
-    if request.method == 'POST':
+    if request.method == 'POST':        
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()

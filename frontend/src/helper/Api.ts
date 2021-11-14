@@ -19,7 +19,6 @@ export class Api {
     };
 
     postProject = (data: string, onSuccess: Function, onFailed: Function) => {
-      console.log(this.getCookie('csrftoken'));
       const headers = {
         'X-CSRF-TOKEN': this.getCookie('csrftoken'),
       };

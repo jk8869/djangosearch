@@ -59,7 +59,7 @@ const ProjectForm = (props: any) => {
             values: ProjectFormValues,
             { setSubmitting }: FormikHelpers<ProjectFormValues>
           ) => {
-            api.postProject(JSON.stringify(values, null, 2), ((res: any) => console.log(res)), ((e: any) => console.log(e)));
+            api.postProject(JSON.stringify(values), ((res: any) => console.log(res)), ((e: any) => console.log(e)));
           }}
         >
           <Form className="form">
