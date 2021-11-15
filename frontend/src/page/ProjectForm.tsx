@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
@@ -23,6 +23,7 @@ interface ProjectFormValues {
 const ProjectForm = (props: any) => {
   const { tags } = props;
   const dispatch = useDispatch();
+  const [image, setImage] = useState();
   const api = new Api();
 
   useEffect(() => {
@@ -39,6 +40,11 @@ const ProjectForm = (props: any) => {
     });
   }, []);
   if (!tags) { return (<div>loading...</div>); }
+
+  const handleImageChange = (e: any) => {
+    setImage(e.target.files[0]);
+  };
+
   return (
     <div className="content-box">
       <div className="formWrapper">
@@ -59,7 +65,7 @@ const ProjectForm = (props: any) => {
             values: ProjectFormValues,
             { setSubmitting }: FormikHelpers<ProjectFormValues>
           ) => {
-            api.postProject(JSON.stringify(values), ((res: any) => console.log(res)), ((e: any) => console.log(e)));
+            api.postProject(values, image, ((res: any) => console.log(res)), ((e: any) => console.log(e)));
           }}
         >
           <Form className="form">
@@ -91,6 +97,7 @@ const ProjectForm = (props: any) => {
                 type="file"
                 name="featured_image"
                 placeholder="choose file"
+                onChange={handleImageChange}
               />
             </div>
             <div className="form__field">

@@ -18,12 +18,18 @@ export class Api {
         .catch((e) => onFailed(e));
     };
 
-    postProject = (data: string, onSuccess: Function, onFailed: Function) => {
+    postProject = (data: any, image: any, onSuccess: Function, onFailed: Function) => {
+      const form_data = new FormData();
+      form_data.append('featured_image', image);
+      form_data.append('title', data.title);
+      form_data.append('descriptions', data.descriptions);
+      console.log(form_data);
       const headers = {
         'X-CSRF-TOKEN': this.getCookie('csrftoken'),
+        'content-type': 'multipart/form-data'
       };
 
-      axios.post(`${this.apiUrl}/create-project/`, data, {
+      axios.post(`${this.apiUrl}/create-project/`, form_data, {
         headers
       })
         .then((response: any) => {
