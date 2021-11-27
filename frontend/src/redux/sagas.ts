@@ -5,11 +5,11 @@ import { PROJECT_LIST_ITEM_SELECTE, PROJECT_LIST_FETCH_FAILED,
   TAG_LIST_FETCH_REQUESTED,
   TAG_LIST_FETCH_SUCCEEDED } from './constants';
 
-function* fetchProjects(action: any) {
+function* fetchProjects(): any {
   try {
     const api = new Api();
     const projectList = yield call(api.getProjects);
-    yield put({ type: PROJECT_LIST_FETCH_SUCCEEDED, projects: projectList });
+    yield put({ type: PROJECT_LIST_FETCH_SUCCEEDED, payload: projectList });
   } catch (e) {
     console.log(e);
   }

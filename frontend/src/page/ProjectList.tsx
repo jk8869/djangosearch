@@ -2,32 +2,15 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import ProjectItem from '../component/ProjectItem';
-import { Project, ProjectConvert } from '../interface/Project';
-import { requestProjectsList, fetchProjectsList } from '../redux/actions';
-import { Api } from '../helper/Api';
+import { Project } from '../interface/Project';
+import { requestProjectsList } from '../redux/actions';
 
 const ProjectList = (props : any) => {
   const dispatch = useDispatch();
   const { loading, projects } = props;
 
-  const getProjects = () => {
-    dispatch(requestProjectsList());
-    const api = new Api();
-    api.getProjects((data : any) => {
-      const tempProjects : Project[] = [];
-      data.map((item: string) => {
-        tempProjects?.push(
-          ProjectConvert.toProject(JSON.stringify(item))
-        );
-      });
-      dispatch(fetchProjectsList(tempProjects));
-    }, (e: any) => {
-
-    });
-  };
-
   useEffect(() => {
-    getProjects();
+    dispatch(requestProjectsList());
   }, []);
 
   if (loading || !projects) { return (<div>loading...</div>); }

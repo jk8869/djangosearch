@@ -1,14 +1,25 @@
+import { throws } from 'assert';
 import axios from 'axios';
 import { url } from 'inspector';
+import { Project, ProjectConvert } from '../interface/Project';
 
 export class Api {
     apiUrl = 'http://localhost:8000/api';
 
-    getProjects = (onSuccess: Function, onFailed: Function) => {
-      axios.get(`${this.apiUrl}/projects`)
+    getProjects = async () => {
+      const tempProjects : Project[] = [];
+      await axios.get(`${this.apiUrl}/projects`)
         .then((response: any) => response.data)
-        .then((data) => onSuccess(data))
-        .catch((e) => onFailed(e));
+        .then((data) => {
+          data.map((item: string) => {
+            tempProjects?.push(
+              ProjectConvert.toProject(JSON.stringify(item))
+            );
+          });
+          return tempProjects;
+        })
+        .catch((e) => throws(e));
+      return tempProjects;
     };
 
     getTags = (onSuccess: Function, onFailed: Function) => {
