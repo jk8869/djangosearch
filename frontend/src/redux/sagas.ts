@@ -5,7 +5,7 @@ import { PROJECT_LIST_ITEM_SELECTE, PROJECT_LIST_FETCH_FAILED,
   TAG_LIST_FETCH_REQUESTED,
   TAG_LIST_FETCH_SUCCEEDED } from './constants';
 
-function* fetchProjects(): any {
+export function* fetchProjects(): any {
   try {
     const api = new Api();
     const projectList = yield call(api.getProjects);
@@ -15,6 +15,6 @@ function* fetchProjects(): any {
   }
 }
 
-export function* mySaga() {
+export function* appSaga() {
   yield takeEvery(PROJECT_LIST_FETCH_REQUESTED, fetchProjects);
 }

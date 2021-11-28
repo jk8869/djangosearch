@@ -11,13 +11,13 @@ import { projectReducer } from './redux/reducers';
 import ProjectList from './page/ProjectList';
 import Navbar from './component/Navbar';
 import ProjectForm from './page/ProjectForm';
-import { mySaga } from './redux/sagas';
+import { appSaga } from './redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(projectReducer, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(appSaga);
 
 ReactDOM.render(
   <React.StrictMode>
